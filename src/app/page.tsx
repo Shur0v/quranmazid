@@ -1,22 +1,76 @@
+import Image from "next/image";
+import LeftbarHomeIcon from "../../public/icons/leftbarhomeicon";
+import LeftbarReadIcon from "../../public/icons/leftbarreadicon";
+import LeftbarGoIcon from "../../public/icons/leftbargoicon";
+import LeftbarBookmarkIcon from "../../public/icons/leftbarbookmarkicon";
+import LeftbarOthersIcon from "../../public/icons/leftbarothersicon";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="grid min-h-screen grid-cols-[56px_280px_1fr_300px]">
-        <aside className="border-r border-border bg-panel p-3">
-          <div className="mb-6 rounded-md bg-accent/20 p-2 text-center text-xs font-semibold text-accent">
-            Logo
-          </div>
-          <div className="space-y-3">
-            <div className="rounded-md border border-border p-2 text-center text-xs text-muted">
-              Icon One
+      <div className="grid min-h-screen grid-cols-[60px_280px_1fr_300px]">
+        <aside className="h-screen border-r border-[#24262b] bg-[#171717]">
+          <nav className="fixed bottom-0 isolate z-[3] h-screen w-[60px] translate-y-0 bg-[#171717]">
+            <div className="flex h-full w-full flex-col items-center">
+              <a className="py-3" href="/">
+                <Image
+                  src="/logo.svg"
+                  alt="Quran Mazid Logo"
+                  width={36}
+                  height={36}
+                  className="h-9 w-9"
+                  priority
+                />
+              </a>
+
+              <div className="flex h-[calc(100vh-120px)] flex-col items-center justify-center gap-6 text-[#8f9491]">
+                <a href="/">
+                  <button
+                    data-state="closed"
+                    className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
+                    type="button"
+                  >
+                    <LeftbarHomeIcon />
+                  </button>
+                </a>
+                <a href="/1">
+                  <button
+                    data-state="closed"
+                    className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
+                    type="button"
+                  >
+                    <LeftbarReadIcon />
+                  </button>
+                </a>
+                <a href="/go">
+                  <button
+                    data-state="closed"
+                    className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
+                    type="button"
+                  >
+                    <LeftbarGoIcon />
+                  </button>
+                </a>
+                <a href="/Profile/bookmarks">
+                  <button
+                    data-state="closed"
+                    className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
+                    type="button"
+                  >
+                    <LeftbarBookmarkIcon />
+                  </button>
+                </a>
+                <button
+                  data-state="closed"
+                  className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
+                  type="button"
+                >
+                  <LeftbarOthersIcon />
+                </button>
+              </div>
+              <div className="h-[60px] w-full" />
             </div>
-            <div className="rounded-md border border-border p-2 text-center text-xs text-muted">
-              Icon Two
-            </div>
-            <div className="rounded-md border border-border p-2 text-center text-xs text-muted">
-              Icon Three
-            </div>
-          </div>
+          </nav>
         </aside>
 
         <aside className="border-r border-border bg-panel-soft p-4">
