@@ -27,3 +27,25 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+.surah-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #2e6b33 transparent;
+}
+
+.surah-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.surah-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.surah-scroll::-webkit-scrollbar-thumb {
+  background: #2e6b33;
+  border-radius: 9999px;
+}
+
+.surah-scroll::-webkit-scrollbar-thumb:hover {
+  background: #3a7c41;
+}

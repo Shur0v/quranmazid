@@ -10,6 +10,18 @@ import TopbarSupportIcon from "../../public/icons/topbarsupporticon";
 import TopbarThemeIcon from "../../public/icons/topbarthemeicon";
 
 export default function Home() {
+  const surahItems = [
+    { id: "001", name: "Al Fatihah", subtitle: "The Opener", arabic: "الفاتحة", active: true },
+    { id: "002", name: "Al Baqarah", subtitle: "The Cow", arabic: "البقرة" },
+    { id: "003", name: "Al Imran", subtitle: "Family of Imran", arabic: "آل عمران" },
+    { id: "004", name: "An Nisa", subtitle: "The Women", arabic: "النساء" },
+    { id: "005", name: "Al Ma'idah", subtitle: "The Table Spread", arabic: "المائدة" },
+    { id: "006", name: "Al An'am", subtitle: "The Cattle", arabic: "الأنعام" },
+    { id: "007", name: "Al A'raf", subtitle: "The Heights", arabic: "الأعراف" },
+    { id: "008", name: "Al Anfal", subtitle: "The Spoils of War", arabic: "الأنفال" },
+    { id: "009", name: "At Tawbah", subtitle: "The Repentance", arabic: "التوبة" },
+  ];
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="grid min-h-screen grid-cols-[60px_1fr]">
@@ -135,23 +147,47 @@ export default function Home() {
             </div>
           </nav>
 
-          <div className="grid grid-cols-[280px_1fr_300px] pt-[60px]">
-            <aside className="border-r border-border bg-panel-soft p-4">
-              <div className="mb-4 rounded-lg border border-border p-2 text-center text-sm font-medium">
-                Surah Tab Area
-              </div>
-              <div className="mb-4 rounded-lg border border-border p-2 text-sm text-muted">
-                Search Surah Box
-              </div>
-              <div className="space-y-3">
-                {["Surah Item One", "Surah Item Two", "Surah Item Three", "Surah Item Four"].map(
-                  (item) => (
-                    <div key={item} className="rounded-xl border border-border p-3">
-                      <p className="text-sm font-semibold">{item}</p>
-                      <p className="text-xs text-muted">Arabic English Name</p>
+          <div className="grid grid-cols-[299px_1fr_300px] pt-[60px]">
+            <aside className="sticky top-[--top-nav-size] isolate z-[1] h-[calc(100vh-60px)] overflow-hidden bg-[#0d0d0d] transition-all duration-300 ease-linear max-laptop:hidden">
+              <div className="flex h-full w-full border-e border-[#1b2432]">
+                <div className="flex h-full w-full flex-col overflow-y-auto pt-6">
+                  <div className="relative isolate flex min-h-10 items-center rounded-full border-4 border-[#171717] bg-[#171717] mb-4 mx-6">
+                    <button className="z-10 h-full w-full text-[14px] font-semibold text-[#c4c4c4]">Surah</button>
+                    <button className="z-10 h-full w-full text-[14px] text-[#787d7a]">Juz</button>
+                    <button className="z-10 h-full w-full text-[14px] text-[#787d7a]">Page</button>
+                    <div className="absolute h-full rounded-full bg-[#0d0d0d] transition-transform duration-300 ease-in-out w-[calc(33.333333333333336%)] translate-x-[0%]" />
+                  </div>
+
+                  <div className="mb-4 px-6">
+                    <div className="flex h-10 items-center gap-3 rounded-full border border-[#1b2432] bg-[#171717] px-3 text-base text-[#787d7a]">
+                      <TopbarSearchIcon className="h-[21px] w-[21px] text-[#787d7a]" />
+                      <input
+                        type="text"
+                        className="w-full bg-transparent font-light outline-none placeholder:text-[#787d7ab3]"
+                        placeholder="Search Surah"
+                        aria-label="Search Surah"
+                      />
                     </div>
-                  )
-                )}
+                  </div>
+
+                  <div className="surah-scroll overflow-y-auto pb-2">
+                    {surahItems.map((surah) => (
+                      <div key={surah.id} className="block pb-2 pe-[26px] ps-[26px]">
+                        <a href={`/${surah.id}`}>
+                          <div className={`group/card flex w-full min-w-[200px] cursor-pointer select-none items-center justify-between gap-5 rounded-xl border border-[#1b2432] px-4 tablet:gap-4 h-[76px] hover:bg-[#132617]/35 ${surah.active ? "!border-[#2f6b32]/30 !bg-[#132617]/35" : ""}`}>
+                            <div className={`flex size-[32px] min-h-8 min-w-8 rotate-45 items-center justify-center rounded-[6px] transition-colors duration-200 ${surah.active ? "bg-[#428038]" : "bg-[#131922] group-hover/card:bg-[#428038]"}`}>
+                              <span className={`-rotate-45 font-medium text-[13px] transition-colors duration-200 ${surah.active ? "text-[#ffffff]" : "text-[#787D7A] group-hover/card:text-[#ffffff]"}`}>{surah.id.replace(/^0+/, "")}</span>
+                            </div>
+                            <div className="flex-grow text-start w-1/2 laptop:w-full desktop:w-1/2 desktop:flex-shrink-0">
+                              <p className="line-clamp-1 break-all pr-3 text-[15px] font-medium text-[#c4c4c4]">{surah.name}</p>
+                              <p className="line-clamp-1 break-all text-[13px] font-normal text-[#787d7a]">{surah.subtitle}</p>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </aside>
 
@@ -188,3 +224,4 @@ export default function Home() {
     </main>
   );
 }
+
