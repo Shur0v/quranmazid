@@ -129,7 +129,7 @@ export default function Home() {
                 {[{ k: "1:1", a: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", t: "In the name of Allah, the Entirely Merciful, the Especially Merciful." }, { k: "1:2", a: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", t: "[All] praise is [due] to Allah, Lord of the worlds -" }, { k: "1:3", a: "الرَّحْمَٰنِ الرَّحِيمِ", t: "The Entirely Merciful, the Especially Merciful," }].map((ayah) => (
                   <div key={ayah.k} className="relative overflow-hidden border-b border-[#1b2432] px-[24px] py-[18px]">
                     <div className="w-full">
-                      <p className="text-[32px] font-semibold leading-none text-[#2f8f42]">{ayah.k}</p>
+                      <p className="text-[16px] font-semibold leading-none text-[#2f8f42] pl-2">{ayah.k}</p>
                     </div>
                     <div className="mt-3 flex w-full gap-7">
                       <div className="flex w-[34px] min-w-[34px] flex-col items-center gap-2">
@@ -172,5 +172,4 @@ export default function Home() {
     </main>
   );
 }
-
 
