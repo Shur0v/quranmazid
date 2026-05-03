@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import LeftbarHomeIcon from "../../public/icons/leftbarhomeicon";
 import LeftbarReadIcon from "../../public/icons/leftbarreadicon";
 import LeftbarGoIcon from "../../public/icons/leftbargoicon";
@@ -8,81 +8,37 @@ import TopbarSearchIcon from "../../public/icons/topbarsearchicon";
 import TopbarSetingIcon from "../../public/icons/topbarsetingicon";
 import TopbarSupportIcon from "../../public/icons/topbarsupporticon";
 import TopbarThemeIcon from "../../public/icons/topbarthemeicon";
+import { BookOpen, Bookmark, Ellipsis, Play } from "lucide-react";
 
 export default function Home() {
   const surahItems = [
-    { id: "001", name: "Al Fatihah", subtitle: "The Opener", arabic: "الفاتحة", active: true },
-    { id: "002", name: "Al Baqarah", subtitle: "The Cow", arabic: "البقرة" },
-    { id: "003", name: "Al Imran", subtitle: "Family of Imran", arabic: "آل عمران" },
-    { id: "004", name: "An Nisa", subtitle: "The Women", arabic: "النساء" },
-    { id: "005", name: "Al Ma'idah", subtitle: "The Table Spread", arabic: "المائدة" },
-    { id: "006", name: "Al An'am", subtitle: "The Cattle", arabic: "الأنعام" },
-    { id: "007", name: "Al A'raf", subtitle: "The Heights", arabic: "الأعراف" },
-    { id: "008", name: "Al Anfal", subtitle: "The Spoils of War", arabic: "الأنفال" },
-    { id: "009", name: "At Tawbah", subtitle: "The Repentance", arabic: "التوبة" },
+    { id: "001", name: "Al Fatihah", subtitle: "The Opener", active: true },
+    { id: "002", name: "Al Baqarah", subtitle: "The Cow" },
+    { id: "003", name: "Al Imran", subtitle: "Family of Imran" },
+    { id: "004", name: "An Nisa", subtitle: "The Women" },
+    { id: "005", name: "Al Ma'idah", subtitle: "The Table Spread" },
+    { id: "006", name: "Al An'am", subtitle: "The Cattle" },
+    { id: "007", name: "Al A'raf", subtitle: "The Heights" },
+    { id: "008", name: "Al Anfal", subtitle: "The Spoils of War" },
+    { id: "009", name: "At Tawbah", subtitle: "The Repentance" },
   ];
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-[#0d0d0d] text-foreground">
       <div className="grid min-h-screen grid-cols-[60px_1fr]">
         <aside className="h-screen border-r border-[#24262b] bg-[#171717]">
           <nav className="fixed bottom-0 isolate z-[3] h-screen w-[60px] translate-y-0 bg-[#171717]">
             <div className="flex h-full w-full flex-col items-center">
               <a className="py-3" href="/">
-                <Image
-                  src="/logo.svg"
-                  alt="Quran Mazid Logo"
-                  width={36}
-                  height={36}
-                  className="h-9 w-9"
-                  priority
-                />
+                <Image src="/logo.svg" alt="Quran Mazid Logo" width={36} height={36} className="h-9 w-9" priority />
               </a>
 
               <div className="flex h-[calc(100vh-120px)] flex-col items-center justify-center gap-6 text-[#8f9491]">
-                <a href="/">
-                  <button
-                    data-state="closed"
-                    className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
-                    type="button"
-                  >
-                    <LeftbarHomeIcon />
-                  </button>
-                </a>
-                <a href="/1">
-                  <button
-                    data-state="closed"
-                    className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
-                    type="button"
-                  >
-                    <LeftbarReadIcon />
-                  </button>
-                </a>
-                <a href="/go">
-                  <button
-                    data-state="closed"
-                    className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
-                    type="button"
-                  >
-                    <LeftbarGoIcon />
-                  </button>
-                </a>
-                <a href="/Profile/bookmarks">
-                  <button
-                    data-state="closed"
-                    className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
-                    type="button"
-                  >
-                    <LeftbarBookmarkIcon />
-                  </button>
-                </a>
-                <button
-                  data-state="closed"
-                  className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]"
-                  type="button"
-                >
-                  <LeftbarOthersIcon />
-                </button>
+                <a href="/"><button data-state="closed" className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]" type="button"><LeftbarHomeIcon /></button></a>
+                <a href="/1"><button data-state="closed" className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]" type="button"><LeftbarReadIcon /></button></a>
+                <a href="/go"><button data-state="closed" className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]" type="button"><LeftbarGoIcon /></button></a>
+                <a href="/Profile/bookmarks"><button data-state="closed" className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]" type="button"><LeftbarBookmarkIcon /></button></a>
+                <button data-state="closed" className="flex size-9 items-center justify-center rounded-sm border-2 border-transparent transition-all duration-300 [&_svg]:size-[22px]" type="button"><LeftbarOthersIcon /></button>
               </div>
 
               <div className="h-[60px] w-full" />
@@ -96,53 +52,17 @@ export default function Home() {
               <div className="flex items-center gap-2.5">
                 <a className="flex items-center gap-2.5 max-tablet:hidden" href="/">
                   <div className="select-none space-y-[2px] text-left">
-                    <p className="mt-[2px] font-sans text-xl font-bold leading-none text-[#c4c4c4]">
-                      Quran Mazid
-                    </p>
-                    <p className="w-max text-[10px] tracking-tight text-[#787d7a]">
-                      Read, Study, and Learn The Quran
-                    </p>
+                    <p className="mt-[2px] font-sans text-xl font-bold leading-none text-[#c4c4c4]">Quran Mazid</p>
+                    <p className="w-max text-[10px] tracking-tight text-[#787d7a]">Read, Study, and Learn The Quran</p>
                   </div>
                 </a>
-                {/* <a href="/">
-                  <p className="text-body font-bold tablet:hidden tablet:text-heading-6"></p>
-                </a> */}
               </div>
 
               <div className="flex items-center gap-6 tablet:gap-6">
-                <button
-                  type="button"
-                  className="group flex size-[34px] min-w-[34px] cursor-pointer items-center justify-center rounded-full bg-[#42803812] p-2 active:scale-90 text-[#2b7d38]"
-                  data-state="closed"
-                  aria-label="icon"
-                >
-                  <TopbarSearchIcon className="h-[18px] w-[18px]" />
-                </button>
-                <button
-                  type="button"
-                  className="group flex size-[34px] min-w-[34px] cursor-pointer items-center justify-center rounded-full bg-[#42803812] p-2 active:scale-90 text-[#2b7d38]"
-                  data-state="closed"
-                  aria-label="icon"
-                >
-                  <TopbarThemeIcon className="h-[18px] w-[18px]" />
-                </button>
-                <button
-                  type="button"
-                  className="group flex size-[34px] min-w-[34px] cursor-pointer items-center justify-center rounded-full bg-[#42803812] p-2 active:scale-90 text-[#2b7d38]"
-                  data-state="closed"
-                  aria-label="icon"
-                >
-                  <TopbarSetingIcon className="h-[18px] w-[18px]" />
-                </button>
-
-                <a
-                  target="_blank"
-                  href="#"
-                  className="flex h-[38px] min-w-[136px] select-none items-center justify-center gap-2 rounded-full bg-[#428038] px-2 text-[#f3f4f6]"
-                >
-                  <span className="text-base font-medium text-white">Support Us</span>
-                  <TopbarSupportIcon className="h-[18px] w-[18px]" />
-                </a>
+                <button type="button" className="group flex size-[34px] min-w-[34px] cursor-pointer items-center justify-center rounded-full bg-[#42803812] p-2 active:scale-90 text-[#2b7d38]" data-state="closed" aria-label="icon"><TopbarSearchIcon className="h-[18px] w-[18px]" /></button>
+                <button type="button" className="group flex size-[34px] min-w-[34px] cursor-pointer items-center justify-center rounded-full bg-[#42803812] p-2 active:scale-90 text-[#2b7d38]" data-state="closed" aria-label="icon"><TopbarThemeIcon className="h-[18px] w-[18px]" /></button>
+                <button type="button" className="group flex size-[34px] min-w-[34px] cursor-pointer items-center justify-center rounded-full bg-[#42803812] p-2 active:scale-90 text-[#2b7d38]" data-state="closed" aria-label="icon"><TopbarSetingIcon className="h-[18px] w-[18px]" /></button>
+                <a target="_blank" href="#" className="flex h-[38px] min-w-[136px] select-none items-center justify-center gap-2 rounded-full bg-[#428038] px-2 text-[#f3f4f6]"><span className="text-base font-medium text-white">Support Us</span><TopbarSupportIcon className="h-[18px] w-[18px]" /></a>
               </div>
             </div>
           </nav>
@@ -161,12 +81,7 @@ export default function Home() {
                   <div className="mb-4 px-6">
                     <div className="flex h-10 items-center gap-3 rounded-full border border-[#1b2432] bg-[#171717] px-3 text-base text-[#787d7a]">
                       <TopbarSearchIcon className="h-[21px] w-[21px] text-[#787d7a]" />
-                      <input
-                        type="text"
-                        className="w-full bg-transparent font-light outline-none placeholder:text-[#787d7ab3]"
-                        placeholder="Search Surah"
-                        aria-label="Search Surah"
-                      />
+                      <input type="text" className="w-full bg-transparent font-light outline-none placeholder:text-[#787d7ab3]" placeholder="Search Surah" aria-label="Search Surah" />
                     </div>
                   </div>
 
@@ -192,30 +107,63 @@ export default function Home() {
             </aside>
 
             <section className="border-r border-border">
-              <div className="space-y-4 p-4">
-                {["Ayah Block One", "Ayah Block Two", "Ayah Block Three"].map((item) => (
-                  <article key={item} className="rounded-xl border border-border p-4">
-                    <p className="mb-2 text-xs text-accent">1:1</p>
-                    <p className="mb-3 text-right text-2xl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-                    <p className="text-lg">{item}</p>
-                  </article>
+              <section className="[--padding-x:15px] tablet:[--padding-x:24px] desktop:[--padding-x:36px]">
+                <div className="grid grid-cols-3 items-center px-[20px] py-[16px]">
+                  <div className="flex items-center justify-start">
+                    <Image
+                      src="https://quranmazid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmakkah.a06c3e3e.png&w=384&q=75"
+                      alt="makkah image"
+                      width={140}
+                      height={95}
+                      className="h-[94.5px] w-[140px] brightness-1000 contrast-110"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="space-y-2 text-center">
+                    <h1 className="text-[22px] font-semibold leading-none text-[#c4c4c4]">Surah Al Fatihah</h1>
+                    <p className="text-[14px] capitalize text-[#787d7a]">Ayah-7, Makkah</p>
+                  </div>
+                  <div />
+                </div>
+
+                {[{ k: "1:1", a: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", t: "In the name of Allah, the Entirely Merciful, the Especially Merciful." }, { k: "1:2", a: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", t: "[All] praise is [due] to Allah, Lord of the worlds -" }, { k: "1:3", a: "الرَّحْمَٰنِ الرَّحِيمِ", t: "The Entirely Merciful, the Especially Merciful," }].map((ayah) => (
+                  <div key={ayah.k} className="relative overflow-hidden border-b border-[#1b2432] px-[24px] py-[18px]">
+                    <div className="w-full">
+                      <p className="text-[32px] font-semibold leading-none text-[#2f8f42]">{ayah.k}</p>
+                    </div>
+                    <div className="mt-3 flex w-full gap-7">
+                      <div className="flex w-[34px] min-w-[34px] flex-col items-center gap-2">
+                        <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><Play size={18} strokeWidth={1.8} /></button>
+                        <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><BookOpen size={18} strokeWidth={1.8} /></button>
+                        <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><Bookmark size={18} strokeWidth={1.8} /></button>
+                        <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><Ellipsis size={18} strokeWidth={1.8} /></button>
+                      </div>
+                      <div className="flex-1">
+                        <div>
+                          <p className="font-arabic text-right text-[54px] leading-[1.35] text-[#c4c4c4]">{ayah.a}</p>
+                        </div>
+                        <div className="mt-4">
+                          <p className="text-[13px] uppercase text-[#787d7a]">SAHEEH INTERNATIONAL</p>
+                        </div>
+                        <div className="mt-2">
+                          <p className="text-[20px] leading-[1.5] text-[#c4c4c4]">{ayah.t}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
-              </div>
+              </section>
             </section>
 
             <aside className="bg-panel p-4">
-              <div className="mb-4 rounded-lg border border-border p-2 text-center text-sm font-medium">
-                Translation Reading
-              </div>
+              <div className="mb-4 rounded-lg border border-border p-2 text-center text-sm font-medium">Translation Reading</div>
               <div className="space-y-3">
                 <div className="rounded-lg border border-border p-3 text-sm">Reading Settings</div>
                 <div className="rounded-lg border border-border p-3 text-sm">Font Settings Panel</div>
                 <div className="rounded-lg border border-border p-3 text-sm">Arabic Size Slider</div>
                 <div className="rounded-lg border border-border p-3 text-sm">Translation Size Slider</div>
                 <div className="rounded-lg border border-border p-3 text-sm">Arabic Font Select</div>
-                <div className="rounded-xl border border-accent/40 bg-accent/10 p-4 text-sm">
-                  Help Support Card
-                </div>
+                <div className="rounded-xl border border-accent/40 bg-accent/10 p-4 text-sm">Help Support Card</div>
               </div>
             </aside>
           </div>
@@ -224,4 +172,5 @@ export default function Home() {
     </main>
   );
 }
+
 
