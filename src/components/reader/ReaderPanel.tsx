@@ -8,10 +8,12 @@ type AyahItem = {
 };
 
 type ReaderPanelProps = {
+  surahName: string;
+  surahMeta: string;
   ayahs: AyahItem[];
 };
 
-export default function ReaderPanel({ ayahs }: ReaderPanelProps) {
+export default function ReaderPanel({ surahName, surahMeta, ayahs }: ReaderPanelProps) {
   return (
     <section className="border-r border-border">
       <section className="[--padding-x:15px] tablet:[--padding-x:24px] desktop:[--padding-x:36px]">
@@ -27,8 +29,8 @@ export default function ReaderPanel({ ayahs }: ReaderPanelProps) {
             />
           </div>
           <div className="space-y-2 text-center">
-            <h1 className="text-[22px] font-semibold leading-none text-[#c4c4c4]">Surah Al Fatihah</h1>
-            <p className="text-[14px] capitalize text-[#787d7a]">Ayah-7, Makkah</p>
+            <h1 className="text-[22px] font-semibold leading-none text-[#c4c4c4]">{surahName}</h1>
+            <p className="text-[14px] capitalize text-[#787d7a]">{surahMeta}</p>
           </div>
           <div />
         </div>

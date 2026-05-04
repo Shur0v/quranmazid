@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node scripts/start-all.js",
+    "start:next": "next dev",
+    "start:backend": "npm --prefix backend run dev",
     "lint": "eslint"
   },
   "dependencies": {
