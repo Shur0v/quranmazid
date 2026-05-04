@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { BookOpen, Bookmark, Ellipsis, Play } from "lucide-react";
+import { useReaderSettings } from "../settings/ReaderSettingsProvider";
 
 type AyahItem = {
   k: string;
@@ -14,8 +17,10 @@ type ReaderPanelProps = {
 };
 
 export default function ReaderPanel({ surahName, surahMeta, ayahs }: ReaderPanelProps) {
+  const { arabicFontPx, translationSize } = useReaderSettings();
+
   return (
-    <section className="hide-scrollbar h-[calc(100vh-60px)] overflow-y-auto border-r border-border">
+    <section className="hide-scrollbar h-full min-h-0 overflow-y-auto border-r border-border">
       <section className="[--padding-x:15px] tablet:[--padding-x:24px] desktop:[--padding-x:36px]">
         <div className="grid grid-cols-3 items-center px-[20px] py-[16px]">
           <div className="flex items-center justify-start">
@@ -49,13 +54,13 @@ export default function ReaderPanel({ surahName, surahMeta, ayahs }: ReaderPanel
               </div>
               <div className="flex-1">
                 <div>
-                  <p className="font-arabic text-right text-[54px] leading-[1.35] text-[#c4c4c4]">{ayah.a}</p>
+                  <p className="font-arabic-reader text-right leading-[1.35] text-[#c4c4c4]" style={{ fontSize: `${arabicFontPx}px` }}>{ayah.a}</p>
                 </div>
                 <div className="mt-4">
                   <p className="text-[13px] uppercase text-[#787d7a]">SAHEEH INTERNATIONAL</p>
                 </div>
                 <div className="mt-2">
-                  <p className="text-[20px] leading-[1.5] text-[#c4c4c4]">{ayah.t}</p>
+                  <p className="leading-[1.5] text-[#c4c4c4]" style={{ fontSize: `${translationSize}px` }}>{ayah.t}</p>
                 </div>
               </div>
             </div>

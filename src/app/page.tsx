@@ -4,6 +4,7 @@ import RightSettingsPanel from "@/components/layout/RightSettingsPanel";
 import SurahSidebar from "@/components/layout/SurahSidebar";
 import TopBar from "@/components/layout/TopBar";
 import ReaderPanel from "@/components/reader/ReaderPanel";
+import { ReaderSettingsProvider } from "@/components/settings/ReaderSettingsProvider";
 import { getReaderPageData } from "@/lib/reader-page-data";
 
 export default async function Home() {
@@ -13,6 +14,7 @@ export default async function Home() {
     id: item.id,
     name: item.nameSimple,
     subtitle: item.nameTranslation,
+    arabicName: item.nameArabic,
     active: item.id === surahDetail.id,
   }));
 
@@ -23,18 +25,20 @@ export default async function Home() {
   }));
 
   return (
-    <AppShell
-      leftSidebar={<LeftIconSidebar />}
-      topBar={<TopBar />}
-      surahSidebar={<SurahSidebar surahItems={surahItems} />}
-      readerPanel={
-        <ReaderPanel
-          surahName={`Surah ${surahDetail.nameSimple}`}
-          surahMeta={`Ayah-${surahDetail.ayahCount}, ${surahDetail.revelationType}`}
-          ayahs={ayahs}
-        />
-      }
-      rightPanel={<RightSettingsPanel />}
-    />
+    <ReaderSettingsProvider>
+      <AppShell
+        leftSidebar={<LeftIconSidebar />}
+        topBar={<TopBar />}
+        surahSidebar={<SurahSidebar surahItems={surahItems} />}
+        readerPanel={
+          <ReaderPanel
+            surahName={`Surah ${surahDetail.nameSimple}`}
+            surahMeta={`Ayah-${surahDetail.ayahCount}, ${surahDetail.revelationType}`}
+            ayahs={ayahs}
+          />
+        }
+        rightPanel={<RightSettingsPanel />}
+      />
+    </ReaderSettingsProvider>
   );
 }

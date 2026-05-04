@@ -5,7 +5,7 @@ import TopbarThemeIcon from "../../../public/icons/topbarthemeicon";
 
 export default function TopBar() {
   return (
-    <nav className="fixed top-0 isolate z-[2] flex h-[60px] w-[calc(100%-60px)] translate-x-0 items-center justify-center border-b border-[#1b2432] bg-[#0d0d0d] transition-transform duration-300 ease-linear">
+    <nav className="fixed left-[60px] right-0 top-0 isolate z-[2] flex h-[60px] w-auto translate-x-0 items-center justify-center border-b border-[#1b2432] bg-[#0d0d0d] transition-transform duration-300 ease-linear">
       <div className="flex h-full w-full items-center justify-between px-6">
         <div className="flex items-center gap-2.5">
           <a className="flex items-center gap-2.5 max-tablet:hidden" href="/">

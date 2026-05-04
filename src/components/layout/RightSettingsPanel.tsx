@@ -1,8 +1,15 @@
+"use client";
+
 import { BookOpen, ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
+import { useReaderSettings } from "../settings/ReaderSettingsProvider";
 
 export default function RightSettingsPanel() {
+  const { arabicUiSize, translationSize, setArabicUiSize, setTranslationSize } = useReaderSettings();
+  const arabicPercent = ((arabicUiSize - 20) / (60 - 20)) * 100;
+  const translationPercent = ((translationSize - 14) / (32 - 14)) * 100;
+
   return (
-    <aside className="h-[calc(100vh-60px)] overflow-hidden border-l border-[#1b2432] bg-[#0d0d0d] px-5 py-6">
+    <aside className="h-full min-h-0 overflow-hidden border-l border-[#1b2432] bg-[#0d0d0d] px-5 py-6">
       <div className="relative isolate mb-6 flex min-h-10 items-center rounded-full border-4 border-[#171717] bg-[#171717]">
         <button className="z-10 h-full w-full text-[14px] font-semibold text-[#c4c4c4]">Translation</button>
         <button className="z-10 h-full w-full text-[14px] text-[#787d7a]">Reading</button>
@@ -29,24 +36,46 @@ export default function RightSettingsPanel() {
         <div className="space-y-4">
           <div className="flex items-center justify-between pt-4">
             <p className="text-[15px] font-semibold leading-none text-[#c4c4c4]">Arabic Font Size</p>
-            <p className="text-[13px] font-medium leading-none text-[#2f8f42]">34</p>
+            <p className="text-[13px] font-medium leading-none text-[#2f8f42]">{arabicUiSize}</p>
           </div>
-          <div className="h-[4px] w-full rounded-full bg-[#2a2a2a]">
-            <div className="relative h-full w-[34%] rounded-full bg-[#2f8f42]">
+          <div className="relative h-[4px] w-full rounded-full bg-[#2a2a2a]">
+            <div className="pointer-events-none relative h-full rounded-full bg-[#2f8f42]" style={{ width: `${arabicPercent}%` }}>
               <span className="absolute right-0 top-1/2 size-[14px] -translate-y-1/2 translate-x-1/2 rounded-full bg-[#2f8f42]" />
             </div>
+            <input
+              type="range"
+              min={20}
+              max={60}
+              step={1}
+              value={arabicUiSize}
+              onChange={(e) => setArabicUiSize(Number(e.target.value))}
+              onInput={(e) => setArabicUiSize(Number((e.target as HTMLInputElement).value))}
+              className="absolute left-0 top-1/2 z-10 h-6 w-full -translate-y-1/2 cursor-pointer appearance-none bg-transparent opacity-0 [touch-action:none]"
+              aria-label="Arabic Font Size"
+            />
           </div>
         </div>
 
         <div className="mt-8 space-y-4">
           <div className="flex items-center justify-between pt-4">
             <p className="text-[15px] font-semibold leading-none text-[#c4c4c4]">Translation Font Size</p>
-            <p className="text-[13px] font-medium leading-none text-[#2f8f42]">20</p>
+            <p className="text-[13px] font-medium leading-none text-[#2f8f42]">{translationSize}</p>
           </div>
-          <div className="h-[4px] w-full rounded-full bg-[#2a2a2a]">
-            <div className="relative h-full w-[20%] rounded-full bg-[#2f8f42]">
+          <div className="relative h-[4px] w-full rounded-full bg-[#2a2a2a]">
+            <div className="pointer-events-none relative h-full rounded-full bg-[#2f8f42]" style={{ width: `${translationPercent}%` }}>
               <span className="absolute right-0 top-1/2 size-[14px] -translate-y-1/2 translate-x-1/2 rounded-full bg-[#2f8f42]" />
             </div>
+            <input
+              type="range"
+              min={14}
+              max={32}
+              step={1}
+              value={translationSize}
+              onChange={(e) => setTranslationSize(Number(e.target.value))}
+              onInput={(e) => setTranslationSize(Number((e.target as HTMLInputElement).value))}
+              className="absolute left-0 top-1/2 z-10 h-6 w-full -translate-y-1/2 cursor-pointer appearance-none bg-transparent opacity-0 [touch-action:none]"
+              aria-label="Translation Font Size"
+            />
           </div>
         </div>
 

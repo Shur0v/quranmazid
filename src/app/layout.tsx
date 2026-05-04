@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Sans_Arabic, Amiri, Playpen_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,6 +14,18 @@ const geistMono = Geist_Mono({
 
 const notoSansArabic = Noto_Sans_Arabic({
   variable: "--font-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const amiriArabic = Amiri({
+  variable: "--font-arabic-surah",
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+});
+
+const playpenArabic = Playpen_Sans_Arabic({
+  variable: "--font-arabic-reader",
   subsets: ["arabic"],
   weight: ["400", "500", "600", "700"],
 });
@@ -36,7 +48,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${notoSansArabic.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${notoSansArabic.variable} ${amiriArabic.variable} ${playpenArabic.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

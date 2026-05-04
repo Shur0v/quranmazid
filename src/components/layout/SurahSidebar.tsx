@@ -4,6 +4,7 @@ type SurahItem = {
   id: number;
   name: string;
   subtitle: string;
+  arabicName: string;
   active?: boolean;
 };
 
@@ -13,7 +14,7 @@ type SurahSidebarProps = {
 
 export default function SurahSidebar({ surahItems }: SurahSidebarProps) {
   return (
-    <aside className="sticky top-[--top-nav-size] isolate z-[1] h-[calc(100vh-60px)] overflow-hidden bg-[#0d0d0d] transition-all duration-300 ease-linear max-laptop:hidden">
+    <aside className="sticky top-[--top-nav-size] isolate z-[1] h-full min-h-0 overflow-hidden bg-[#0d0d0d] transition-all duration-300 ease-linear max-laptop:hidden">
       <div className="flex h-full w-full border-e border-[#1b2432]">
         <div className="flex h-full w-full flex-col overflow-y-auto pt-6">
           <div className="relative isolate mb-4 mx-6 flex min-h-10 items-center rounded-full border-4 border-[#171717] bg-[#171717]">
@@ -41,6 +42,11 @@ export default function SurahSidebar({ surahItems }: SurahSidebarProps) {
                     <div className="w-1/2 flex-grow text-start laptop:w-full desktop:w-1/2 desktop:flex-shrink-0">
                       <p className="line-clamp-1 break-all pr-3 text-[15px] font-medium text-[#c4c4c4]">{surah.name}</p>
                       <p className="line-clamp-1 break-all text-[13px] font-normal text-[#787d7a]">{surah.subtitle}</p>
+                    </div>
+                    <div className="flex h-[20px] items-center justify-end">
+                      <p className="font-arabic-surah line-clamp-2 text-right text-[20px] leading-[1] text-[#787d7a]">
+                        {surah.arabicName}
+                      </p>
                     </div>
                   </div>
                 </a>
