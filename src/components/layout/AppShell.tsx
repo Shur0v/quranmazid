@@ -74,7 +74,7 @@ export default function AppShell({
                 topBarHidden ? "top-0" : "top-[60px]"
               }`}
             >
-              <div className="hidden min-[1024px]:block">{surahSidebar}</div>
+              <div className="hidden h-full min-h-0 min-[1024px]:block">{surahSidebar}</div>
               {readerPanel}
               <div className="hidden min-[1440px]:block">{rightPanel}</div>
             </div>

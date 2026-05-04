@@ -45,7 +45,7 @@ export default function SurahSidebar({
       }
     >
       <div className="flex h-full w-full border-e border-[var(--color-divider)]">
-        <div className="flex h-full w-full flex-col overflow-y-auto pt-6">
+        <div className="flex h-full w-full min-h-0 flex-col overflow-hidden pt-6">
           <div className="relative isolate mb-4 mx-6 flex min-h-10 items-center rounded-full border-4 border-[var(--color-divider)] bg-[var(--color-divider)]">
             <button
               type="button"
@@ -95,7 +95,7 @@ export default function SurahSidebar({
             </div>
           </div>
 
-          <div className="surah-scroll overflow-y-auto pb-2">
+          <div className="surah-scroll flex-1 min-h-0 overflow-y-auto pb-2">
             {normalizedQuery && filteredSurahs.length === 0 ? (
               <p className="px-[26px] pb-2 text-[13px] text-[var(--color-text-muted)]">No surah found</p>
             ) : null}
