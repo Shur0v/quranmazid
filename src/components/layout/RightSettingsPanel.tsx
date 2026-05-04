@@ -13,7 +13,7 @@ export default function RightSettingsPanel() {
   const fontFaceLabel = arabicFontFace === "amiri" ? "Amiri" : arabicFontFace === "noto" ? "Noto Sans Arabic" : "Playpen Sans Arabic";
 
   return (
-    <aside className="h-full min-h-0 overflow-hidden border-l border-[#1b2432] bg-[#0d0d0d] px-5 py-6">
+    <aside className="h-full min-h-0 overflow-hidden bg-[#0d0d0d] px-5 py-6">
       <div className="relative isolate mb-6 flex min-h-10 items-center rounded-full border-4 border-[#171717] bg-[#171717]">
         <button
           type="button"
@@ -131,7 +131,7 @@ export default function RightSettingsPanel() {
           <p className="relative z-20 mt-2 text-[13px] leading-[1.5] text-[#787d7a]">
             Your regular support helps us reach our religious brothers and sisters with the message of Islam. Join our mission and be part of the big change.
           </p>
-          <button className="mt-3 flex h-10 w-full items-center justify-center rounded-sm bg-[#428038] px-4 text-[14px] font-semibold leading-none text-white">Support Us</button>
+          <button className="mt-3 flex h-10 w-full items-center justify-center rounded-lg bg-[#428038] px-4 text-[14px] font-semibold leading-none text-white cursor-pointer">Support Us</button>
         </div>
       </div>
     </aside>

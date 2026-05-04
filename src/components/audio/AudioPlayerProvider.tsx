@@ -182,7 +182,7 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
     <AudioPlayerContext.Provider value={value}>
       {children}
       {currentTrack ? (
-        <div className="fixed bottom-0 left-[60px] right-0 z-40 h-[60px] border-t border-[#1b2432] bg-[#171717]">
+        <div className="fixed bottom-0 left-[60px] right-0 z-40 h-[60px] border-t border-[#171717] bg-[#171717]">
           <div className="flex h-full items-center justify-between px-6">
             <p className="text-[14px] font-semibold text-[#c4c4c4]">
               {currentTrack.surahLabel} : {currentTrack.ayahNo}

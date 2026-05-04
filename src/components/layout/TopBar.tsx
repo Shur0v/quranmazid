@@ -1,11 +1,31 @@
+ "use client";
+
+import { useEffect, useState } from "react";
 import TopbarSearchIcon from "../../../public/icons/topbarsearchicon";
 import TopbarSetingIcon from "../../../public/icons/topbarsetingicon";
 import TopbarSupportIcon from "../../../public/icons/topbarsupporticon";
 import TopbarThemeIcon from "../../../public/icons/topbarthemeicon";
 
 export default function TopBar() {
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    const onDirection = (event: Event) => {
+      const customEvent = event as CustomEvent<"up" | "down">;
+      setHidden(customEvent.detail === "down");
+    };
+    window.addEventListener("reader-scroll-direction", onDirection as EventListener);
+    return () => {
+      window.removeEventListener("reader-scroll-direction", onDirection as EventListener);
+    };
+  }, []);
+
   return (
-    <nav className="fixed left-[60px] right-0 top-0 isolate z-[2] flex h-[60px] w-auto translate-x-0 items-center justify-center border-b border-[#1b2432] bg-[#0d0d0d] transition-transform duration-300 ease-linear">
+    <nav
+      className={`fixed left-[60px] right-0 top-0 isolate z-[2] flex h-[60px] w-auto translate-x-0 items-center justify-center border-b border-[#171717] bg-[#0d0d0d] transition-transform duration-300 ease-linear ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      }`}
+    >
       <div className="flex h-full w-full items-center justify-between px-6">
         <div className="flex items-center gap-2.5">
           <a className="flex items-center gap-2.5 max-tablet:hidden" href="/">
