@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { BookOpen, Bookmark, Ellipsis, Play } from "lucide-react";
+import { BookOpen, Bookmark, Ellipsis, Pause, Play } from "lucide-react";
 import { useReaderSettings } from "../settings/ReaderSettingsProvider";
+import { useAudioPlayer } from "../audio/AudioPlayerProvider";
 
 type AyahItem = {
   k: string;
@@ -19,6 +20,7 @@ type ReaderPanelProps = {
 
 export default function ReaderPanel({ surahId, surahName, surahMeta, ayahs }: ReaderPanelProps) {
   const { arabicFontPx, translationSize, arabicFontFace } = useReaderSettings();
+  const { playAyah, isCurrentAyah, isPlaying } = useAudioPlayer();
   const isMadinahSurah = /madinah|medina/i.test(surahMeta);
   const surahHeaderImage = isMadinahSurah
     ? "https://quranmazid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmadinah.d27df76f.png&w=384&q=75"
@@ -30,6 +32,8 @@ export default function ReaderPanel({ surahId, surahName, surahMeta, ayahs }: Re
       : arabicFontFace === "noto"
         ? "font-arabic"
         : "font-arabic-reader";
+  const toArabicIndic = (value: number) =>
+    String(value).replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)] || digit);
 
   return (
     <section className="hide-scrollbar h-full min-h-0 overflow-y-auto border-r border-border">
@@ -70,14 +74,33 @@ export default function ReaderPanel({ surahId, surahName, surahMeta, ayahs }: Re
             </div>
             <div className="mt-3 flex w-full gap-7">
               <div className="flex w-[34px] min-w-[34px] flex-col items-center gap-2">
-                <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><Play size={18} strokeWidth={1.8} /></button>
+                <button
+                  type="button"
+                  onClick={() => playAyah(surahId, Number(ayah.k.split(":")[1] || 1), surahName.replace(/^Surah\s+/i, ""))}
+                  className="flex size-[34px] cursor-pointer items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"
+                >
+                  {isCurrentAyah(ayah.k) && isPlaying ? (
+                    <Pause size={18} strokeWidth={1.8} />
+                  ) : (
+                    <Play size={18} strokeWidth={1.8} />
+                  )}
+                </button>
                 <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><BookOpen size={18} strokeWidth={1.8} /></button>
                 <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><Bookmark size={18} strokeWidth={1.8} /></button>
                 <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><Ellipsis size={18} strokeWidth={1.8} /></button>
               </div>
               <div className="flex-1">
                 <div>
-                  <p className={`${readerArabicClass} text-right leading-[1.35] text-[#c4c4c4]`} style={{ fontSize: `${arabicFontPx}px` }}>{ayah.a}</p>
+                  <p
+                    dir="rtl"
+                    className={`${readerArabicClass} text-right leading-[1.35] text-[#c4c4c4]`}
+                    style={{ fontSize: `${arabicFontPx}px` }}
+                  >
+                    {ayah.a}{" "}
+                    <span className="inline-block align-middle text-[0.92em]">
+                      {`﴿${toArabicIndic(Number(ayah.k.split(":")[1] || 0))}﴾`}
+                    </span>
+                  </p>
                 </div>
                 <div className="mt-4">
                   <p className="text-[13px] uppercase text-[#787d7a]">SAHEEH INTERNATIONAL</p>
