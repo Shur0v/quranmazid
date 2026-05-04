@@ -7,6 +7,7 @@ import { useReaderSettings } from "../settings/ReaderSettingsProvider";
 export default function RightSettingsPanel() {
   const { arabicUiSize, translationSize, arabicFontFace, setArabicUiSize, setTranslationSize, setArabicFontFace } = useReaderSettings();
   const [fontFaceOpen, setFontFaceOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<"translation" | "reading">("translation");
   const arabicPercent = ((arabicUiSize - 20) / (60 - 20)) * 100;
   const translationPercent = ((translationSize - 14) / (32 - 14)) * 100;
   const fontFaceLabel = arabicFontFace === "amiri" ? "Amiri" : arabicFontFace === "noto" ? "Noto Sans Arabic" : "Playpen Sans Arabic";
@@ -14,9 +15,24 @@ export default function RightSettingsPanel() {
   return (
     <aside className="h-full min-h-0 overflow-hidden border-l border-[#1b2432] bg-[#0d0d0d] px-5 py-6">
       <div className="relative isolate mb-6 flex min-h-10 items-center rounded-full border-4 border-[#171717] bg-[#171717]">
-        <button className="z-10 h-full w-full text-[14px] font-semibold text-[#c4c4c4]">Translation</button>
-        <button className="z-10 h-full w-full text-[14px] text-[#787d7a]">Reading</button>
-        <div className="absolute h-full w-1/2 rounded-full bg-[#0d0d0d]" />
+        <button
+          type="button"
+          onClick={() => setActiveTab("translation")}
+          className={`z-10 h-full w-full cursor-pointer text-[14px] transition-colors ${activeTab === "translation" ? "font-semibold text-[#c4c4c4]" : "text-[#787d7a]"}`}
+        >
+          Translation
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("reading")}
+          className={`z-10 h-full w-full cursor-pointer text-[14px] transition-colors ${activeTab === "reading" ? "font-semibold text-[#c4c4c4]" : "text-[#787d7a]"}`}
+        >
+          Reading
+        </button>
+        <div
+          className="absolute h-full w-1/2 rounded-full bg-[#0d0d0d] transition-transform duration-300 ease-in-out"
+          style={{ transform: activeTab === "translation" ? "translateX(0%)" : "translateX(100%)" }}
+        />
       </div>
 
       <div className="space-y-5">
