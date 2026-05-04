@@ -32,7 +32,7 @@ export default function AppShell({
   }, []);
 
   return (
-    <main className="h-dvh bg-[#0d0d0d] text-foreground">
+    <main className="h-dvh bg-[var(--color-surface)] text-foreground">
       <div className="grid h-dvh grid-cols-[60px_1fr] overflow-hidden">
         {leftSidebar}
         <AudioPlayerProvider>
@@ -53,3 +53,5 @@ export default function AppShell({
     </main>
   );
 }
+
+

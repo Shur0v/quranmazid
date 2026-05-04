@@ -3,7 +3,11 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BookOpen, Bookmark, Ellipsis, Pause, Play } from "lucide-react";
+import ReaderpannelBookmarkIcon from "../../../public/icons/readerpannelbookmarkicon";
+import ReaderpannelMoreIcon from "../../../public/icons/readerpannelmoreicon";
+import ReaderpannelPauseIcon from "../../../public/icons/readerpannelpauseicon";
+import ReaderpannelPlayIcon from "../../../public/icons/readerpannelplayicon";
+import ReaderpannelTafsirIcon from "../../../public/icons/readerpanneltafsiricon";
 import { useReaderSettings } from "../settings/ReaderSettingsProvider";
 import { useAudioPlayer } from "../audio/AudioPlayerProvider";
 
@@ -64,7 +68,7 @@ export default function ReaderPanel({
   return (
     <section
       onScroll={handleReaderScroll}
-      className="hide-scrollbar h-full min-h-0 overflow-y-auto border-r border-[#171717]"
+      className="hide-scrollbar h-full min-h-0 overflow-y-auto border-r border-[var(--color-divider)]"
     >
       <section className="[--padding-x:15px] tablet:[--padding-x:24px] desktop:[--padding-x:36px]">
         <div className="grid grid-cols-3 items-center px-[20px] py-[16px]">
@@ -79,8 +83,8 @@ export default function ReaderPanel({
             />
           </div>
           <div className="space-y-2 text-center">
-            <h1 className="text-[22px] font-semibold leading-none text-[#c4c4c4]">{surahName}</h1>
-            <p className="text-[14px] capitalize text-[#787d7a]">{surahMeta}</p>
+            <h1 className="text-[22px] font-semibold leading-none text-[var(--color-text-main)]">{surahName}</h1>
+            <p className="text-[14px] capitalize text-[var(--color-text-muted)]">{surahMeta}</p>
           </div>
           <div className="flex items-center justify-end">
             {surahId !== 1 ? (
@@ -97,38 +101,67 @@ export default function ReaderPanel({
         </div>
 
         {ayahs.map((ayah) => (
-          <div key={ayah.k} className="relative overflow-hidden border-b border-[#171717] px-[24px] py-[18px]">
+          <div key={ayah.k} className="relative overflow-hidden border-b border-[var(--color-divider)] px-[24px] py-[18px]">
             <div className="w-full">
-              <p className="pl-2 text-[16px] font-semibold leading-none text-[#2f8f42]">{ayah.k}</p>
+              <p className="pl-2 text-[16px] font-semibold leading-none text-[var(--color-accent)]">{ayah.k}</p>
             </div>
             <div className="mt-3 flex w-full gap-7">
               <div className="flex w-[34px] min-w-[34px] flex-col items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() =>
-                    playAyah(
-                      surahId,
-                      Number(ayah.k.split(":")[1] || 1),
-                      surahName.replace(/^Surah\s+/i, ""),
-                    )
-                  }
-                  className="flex size-[34px] cursor-pointer items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"
-                >
-                  {isCurrentAyah(ayah.k) && isPlaying ? (
-                    <Pause size={18} strokeWidth={1.8} />
-                  ) : (
-                    <Play size={18} strokeWidth={1.8} />
-                  )}
-                </button>
-                <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><BookOpen size={18} strokeWidth={1.8} /></button>
-                <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><Bookmark size={18} strokeWidth={1.8} /></button>
-                <button className="flex size-[34px] items-center justify-center rounded-full p-2 text-[#787d7a] hover:bg-[#132617]"><Ellipsis size={18} strokeWidth={1.8} /></button>
+                <div className="group relative">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      playAyah(
+                        surahId,
+                        Number(ayah.k.split(":")[1] || 1),
+                        surahName.replace(/^Surah\s+/i, ""),
+                      )
+                    }
+                    className="flex size-[34px] cursor-pointer items-center justify-center rounded-full p-2 text-[var(--color-text-muted)] hover:bg-[var(--color-hover-surface)]"
+                  >
+                    {isCurrentAyah(ayah.k) && isPlaying ? (
+                      <ReaderpannelPauseIcon className="text-[var(--color-icon-muted)]" />
+                    ) : (
+                      <ReaderpannelPlayIcon className="text-[var(--color-icon-muted)]" />
+                    )}
+                  </button>
+                  <span className="pointer-events-none absolute left-[42px] top-1/2 z-20 -translate-y-1/2 whitespace-nowrap rounded-lg bg-[#d9d9d9] px-3 py-2 text-[12px] leading-none text-[#2a2a2a] opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100">
+                    {isCurrentAyah(ayah.k) && isPlaying ? "Pause" : "Play"}
+                  </span>
+                </div>
+
+                <div className="group relative">
+                  <button className="flex size-[34px] cursor-pointer items-center justify-center rounded-full p-2 text-[var(--color-text-muted)] hover:bg-[var(--color-hover-surface)]">
+                    <ReaderpannelTafsirIcon className="h-[18px] w-[18px] text-[var(--color-icon-muted)]" />
+                  </button>
+                  <span className="pointer-events-none absolute left-[42px] top-1/2 z-20 -translate-y-1/2 whitespace-nowrap rounded-lg bg-[#d9d9d9] px-3 py-2 text-[12px] leading-none text-[#2a2a2a] opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100">
+                    Tafsir
+                  </span>
+                </div>
+
+                <div className="group relative">
+                  <button className="flex size-[34px] cursor-pointer items-center justify-center rounded-full p-2 text-[var(--color-text-muted)] hover:bg-[var(--color-hover-surface)]">
+                    <ReaderpannelBookmarkIcon className="h-[18px] w-[18px] text-[var(--color-icon-muted)]" />
+                  </button>
+                  <span className="pointer-events-none absolute left-[42px] top-1/2 z-20 -translate-y-1/2 whitespace-nowrap rounded-lg bg-[#d9d9d9] px-3 py-2 text-[12px] leading-none text-[#2a2a2a] opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100">
+                    Bookmark
+                  </span>
+                </div>
+
+                <div className="group relative">
+                  <button className="flex size-[34px] cursor-pointer items-center justify-center rounded-full p-2 text-[var(--color-text-muted)] hover:bg-[var(--color-hover-surface)]">
+                    <ReaderpannelMoreIcon className="h-[18px] w-[18px] text-[var(--color-icon-muted)]" />
+                  </button>
+                  <span className="pointer-events-none absolute left-[42px] top-1/2 z-20 -translate-y-1/2 whitespace-nowrap rounded-lg bg-[#d9d9d9] px-3 py-2 text-[12px] leading-none text-[#2a2a2a] opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100">
+                    More
+                  </span>
+                </div>
               </div>
               <div className="flex-1">
                 <div>
                   <p
                     dir="rtl"
-                    className={`${readerArabicClass} text-right leading-[1.35] text-[#c4c4c4]`}
+                    className={`${readerArabicClass} text-right leading-[1.35] text-[var(--color-text-main)]`}
                     style={{ fontSize: `${arabicFontPx}px` }}
                   >
                     {ayah.a}{" "}
@@ -138,10 +171,10 @@ export default function ReaderPanel({
                   </p>
                 </div>
                 <div className="mt-4">
-                  <p className="text-[13px] uppercase text-[#787d7a]">SAHEEH INTERNATIONAL</p>
+                  <p className="text-[13px] uppercase text-[var(--color-text-muted)]">SAHEEH INTERNATIONAL</p>
                 </div>
                 <div className="mt-2">
-                  <p className="leading-[1.5] text-[#c4c4c4]" style={{ fontSize: `${translationSize}px` }}>
+                  <p className="leading-[1.5] text-[var(--color-text-main)]" style={{ fontSize: `${translationSize}px` }}>
                     {ayah.t}
                   </p>
                 </div>
@@ -151,17 +184,17 @@ export default function ReaderPanel({
         ))}
 
         <div className="flex items-center justify-center pb-24 pt-12">
-          <div className="mx-auto inline-flex items-center rounded-full border border-[#171717] bg-[#171717] px-4 py-3">
+          <div className="mx-auto inline-flex items-center rounded-full border border-[var(--color-divider)] bg-[var(--color-divider)] px-4 py-3">
             {previousSurahId ? (
               <Link
                 href={`/surah/${previousSurahId}`}
-                className="flex items-center gap-2 px-4 text-[14px] font-medium leading-none text-[#787d7a]"
+                className="flex items-center gap-2 px-4 text-[14px] font-medium leading-none text-[var(--color-text-muted)]"
               >
                 <span className="inline-flex h-[14px] items-center text-[16px] leading-none">‹</span>
                 <span>Previous</span>
               </Link>
             ) : (
-              <span className="flex items-center gap-2 px-4 text-[14px] font-medium leading-none text-[#3f4341]">
+              <span className="flex items-center gap-2 px-4 text-[14px] font-medium leading-none text-[var(--color-disabled)]">
                 <span className="inline-flex h-[14px] items-center text-[16px] leading-none">‹</span>
                 Previous
               </span>
@@ -170,13 +203,13 @@ export default function ReaderPanel({
             {nextSurahId ? (
               <Link
                 href={`/surah/${nextSurahId}`}
-                className="flex items-center gap-2 px-4 text-[14px] font-medium leading-none text-[#787d7a]"
+                className="flex items-center gap-2 px-4 text-[14px] font-medium leading-none text-[var(--color-text-muted)]"
               >
                 <span>Next</span>
                 <span className="inline-flex h-[14px] items-center text-[16px] leading-none">›</span>
               </Link>
             ) : (
-              <span className="flex items-center gap-2 px-4 text-[14px] font-medium leading-none text-[#3f4341]">
+              <span className="flex items-center gap-2 px-4 text-[14px] font-medium leading-none text-[var(--color-disabled)]">
                 Next
                 <span className="inline-flex h-[14px] items-center text-[16px] leading-none">›</span>
               </span>
@@ -187,3 +220,6 @@ export default function ReaderPanel({
     </section>
   );
 }
+
+
+

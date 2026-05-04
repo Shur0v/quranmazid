@@ -10,7 +10,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { Pause, Play, RotateCcw, RotateCw, X } from "lucide-react";
+import AudioplayerCrossIcon from "../../../public/icons/audioplayercrossicon";
+import AudioplayerMoreIcon from "../../../public/icons/audioplayermoreicon";
+import AudioplayerPauseIcon from "../../../public/icons/audioplayerpauseicon";
+import AudioplayerPlayIcon from "../../../public/icons/audioplayerplayicon";
+import AudioplayerSkipIcon from "../../../public/icons/audioplayerskipicon";
 import { fetchAyahAudio } from "@/lib/api/audio.api";
 
 type CurrentTrack = {
@@ -182,61 +186,61 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
     <AudioPlayerContext.Provider value={value}>
       {children}
       {currentTrack ? (
-        <div className="fixed bottom-0 left-[60px] right-0 z-40 h-[60px] border-t border-[#171717] bg-[#171717]">
+        <div className="fixed bottom-0 left-[60px] right-0 z-40 h-[60px] border-t border-[var(--color-divider)] bg-[var(--color-divider)]">
           <div className="flex h-full items-center justify-between px-6">
-            <p className="text-[14px] font-semibold text-[#c4c4c4]">
+            <p className="text-[14px] font-semibold text-[var(--color-text-main)]">
               {currentTrack.surahLabel} : {currentTrack.ayahNo}
             </p>
             <div className="flex items-center gap-6">
-              <p className="text-[13px] font-medium leading-none text-[#8f9491]">
+              <p className="text-[13px] font-medium leading-none text-[var(--color-icon-muted)]">
                 {formatTime(currentTime)}
               </p>
               <button
                 type="button"
-                className="flex size-[34px] cursor-pointer items-center justify-center rounded-full text-[22px] leading-none text-[#787d7a] hover:bg-[#42803812]"
+                className="flex size-[34px] cursor-pointer items-center justify-center rounded-full text-[22px] leading-none text-[var(--color-text-muted)] hover:bg-[var(--color-accent-soft)]"
                 aria-label="More options"
               >
-                ···
+                <AudioplayerMoreIcon className="h-[18px] w-[18px] text-[var(--color-text-muted)]" />
               </button>
               <button
                 type="button"
                 onClick={() => seekBy(-5)}
-                className="flex size-[34px] cursor-pointer items-center justify-center rounded-full text-[#8f9491] hover:bg-[#42803812]"
+                className="flex size-[34px] cursor-pointer items-center justify-center rounded-full text-[var(--color-icon-muted)] hover:bg-[var(--color-accent-soft)]"
                 aria-label="Back 5 seconds"
               >
-                <RotateCcw size={18} />
+                <AudioplayerSkipIcon className="h-[16px] w-[18px] rotate-180 text-[var(--color-icon-muted)]" />
               </button>
               <button
                 type="button"
                 onClick={togglePlayPause}
-                className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-[#428038] text-[#0d0d0d]"
+                className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-surface)]"
                 aria-label={isPlaying ? "Pause audio" : "Play audio"}
               >
                 {isLoading ? (
-                  <span className="text-[11px] font-semibold text-[#0d0d0d]">...</span>
+                  <span className="text-[11px] font-semibold text-[var(--color-surface)]">...</span>
                 ) : isPlaying ? (
-                  <Pause size={18} strokeWidth={2} />
+                  <AudioplayerPauseIcon className="text-[var(--color-surface)]" />
                 ) : (
-                  <Play size={18} strokeWidth={2} />
+                  <AudioplayerPlayIcon className="text-[var(--color-surface)]" />
                 )}
               </button>
               <button
                 type="button"
                 onClick={() => seekBy(5)}
-                className="flex size-[34px] cursor-pointer items-center justify-center rounded-full text-[#8f9491] hover:bg-[#42803812]"
+                className="flex size-[34px] cursor-pointer items-center justify-center rounded-full text-[var(--color-icon-muted)] hover:bg-[var(--color-accent-soft)]"
                 aria-label="Forward 5 seconds"
               >
-                <RotateCw size={18} />
+                <AudioplayerSkipIcon className="h-[16px] w-[18px] text-[var(--color-icon-muted)]" />
               </button>
               <button
                 type="button"
                 onClick={closePlayer}
-                className="flex size-[34px] cursor-pointer items-center justify-center rounded-full text-[#787d7a] hover:bg-[#42803812]"
+                className="flex size-[34px] cursor-pointer items-center justify-center rounded-full text-[var(--color-text-muted)] hover:bg-[var(--color-accent-soft)]"
                 aria-label="Close player"
               >
-                <X size={18} />
+                <AudioplayerCrossIcon className="h-[18px] w-[18px] text-[var(--color-text-muted)]" />
               </button>
-              <p className="text-[13px] font-medium leading-none text-[#8f9491]">
+              <p className="text-[13px] font-medium leading-none text-[var(--color-icon-muted)]">
                 {formatTime(duration)}
               </p>
             </div>
@@ -255,3 +259,5 @@ export function useAudioPlayer() {
   }
   return ctx;
 }
+
+
