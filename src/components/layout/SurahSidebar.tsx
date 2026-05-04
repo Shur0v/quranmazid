@@ -1,7 +1,7 @@
 import TopbarSearchIcon from "../../../public/icons/topbarsearchicon";
 
 type SurahItem = {
-  id: string;
+  id: number;
   name: string;
   subtitle: string;
   active?: boolean;
@@ -33,10 +33,10 @@ export default function SurahSidebar({ surahItems }: SurahSidebarProps) {
           <div className="surah-scroll overflow-y-auto pb-2">
             {surahItems.map((surah) => (
               <div key={surah.id} className="block pb-2 pe-[26px] ps-[26px]">
-                <a href={`/${surah.id}`}>
+                <a href={`/surah/${surah.id}`}>
                   <div className={`group/card flex h-[76px] w-full min-w-[200px] cursor-pointer select-none items-center justify-between gap-5 rounded-xl border border-[#1b2432] px-4 tablet:gap-4 hover:bg-[#132617]/35 ${surah.active ? "!border-[#2f6b32]/30 !bg-[#132617]/35" : ""}`}>
                     <div className={`flex size-[32px] min-h-8 min-w-8 rotate-45 items-center justify-center rounded-[6px] transition-colors duration-200 ${surah.active ? "bg-[#428038]" : "bg-[#131922] group-hover/card:bg-[#428038]"}`}>
-                      <span className={`-rotate-45 text-[13px] font-medium transition-colors duration-200 ${surah.active ? "text-[#ffffff]" : "text-[#787D7A] group-hover/card:text-[#ffffff]"}`}>{surah.id.replace(/^0+/, "")}</span>
+                      <span className={`-rotate-45 text-[13px] font-medium transition-colors duration-200 ${surah.active ? "text-[#ffffff]" : "text-[#787D7A] group-hover/card:text-[#ffffff]"}`}>{surah.id}</span>
                     </div>
                     <div className="w-1/2 flex-grow text-start laptop:w-full desktop:w-1/2 desktop:flex-shrink-0">
                       <p className="line-clamp-1 break-all pr-3 text-[15px] font-medium text-[#c4c4c4]">{surah.name}</p>
