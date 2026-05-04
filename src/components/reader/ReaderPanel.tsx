@@ -11,13 +11,25 @@ type AyahItem = {
 };
 
 type ReaderPanelProps = {
+  surahId: number;
   surahName: string;
   surahMeta: string;
   ayahs: AyahItem[];
 };
 
-export default function ReaderPanel({ surahName, surahMeta, ayahs }: ReaderPanelProps) {
-  const { arabicFontPx, translationSize } = useReaderSettings();
+export default function ReaderPanel({ surahId, surahName, surahMeta, ayahs }: ReaderPanelProps) {
+  const { arabicFontPx, translationSize, arabicFontFace } = useReaderSettings();
+  const isMadinahSurah = /madinah|medina/i.test(surahMeta);
+  const surahHeaderImage = isMadinahSurah
+    ? "https://quranmazid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmadinah.d27df76f.png&w=384&q=75"
+    : "https://quranmazid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmakkah.a06c3e3e.png&w=384&q=75";
+  const surahHeaderAlt = isMadinahSurah ? "madinah image" : "makkah image";
+  const readerArabicClass =
+    arabicFontFace === "amiri"
+      ? "font-arabic-surah"
+      : arabicFontFace === "noto"
+        ? "font-arabic"
+        : "font-arabic-reader";
 
   return (
     <section className="hide-scrollbar h-full min-h-0 overflow-y-auto border-r border-border">
@@ -25,8 +37,8 @@ export default function ReaderPanel({ surahName, surahMeta, ayahs }: ReaderPanel
         <div className="grid grid-cols-3 items-center px-[20px] py-[16px]">
           <div className="flex items-center justify-start">
             <Image
-              src="https://quranmazid.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmakkah.a06c3e3e.png&w=384&q=75"
-              alt="makkah image"
+              src={surahHeaderImage}
+              alt={surahHeaderAlt}
               width={140}
               height={95}
               className="h-[94.5px] w-[140px] brightness-1000 contrast-110"
@@ -37,7 +49,18 @@ export default function ReaderPanel({ surahName, surahMeta, ayahs }: ReaderPanel
             <h1 className="text-[22px] font-semibold leading-none text-[#c4c4c4]">{surahName}</h1>
             <p className="text-[14px] capitalize text-[#787d7a]">{surahMeta}</p>
           </div>
-          <div />
+          <div className="flex items-center justify-end">
+            {surahId !== 1 ? (
+              <Image
+                src="https://quranmazid.com/_next/static/media/bismillah.2a2f3d14.svg"
+                alt="bismillah"
+                width={220}
+                height={48}
+                className="h-auto w-[220px] max-w-full opacity-80 brightness-900 contrast-20 invert"
+                unoptimized
+              />
+            ) : null}
+          </div>
         </div>
 
         {ayahs.map((ayah) => (
@@ -54,7 +77,7 @@ export default function ReaderPanel({ surahName, surahMeta, ayahs }: ReaderPanel
               </div>
               <div className="flex-1">
                 <div>
-                  <p className="font-arabic-reader text-right leading-[1.35] text-[#c4c4c4]" style={{ fontSize: `${arabicFontPx}px` }}>{ayah.a}</p>
+                  <p className={`${readerArabicClass} text-right leading-[1.35] text-[#c4c4c4]`} style={{ fontSize: `${arabicFontPx}px` }}>{ayah.a}</p>
                 </div>
                 <div className="mt-4">
                   <p className="text-[13px] uppercase text-[#787d7a]">SAHEEH INTERNATIONAL</p>

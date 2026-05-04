@@ -32,6 +32,7 @@ export default async function Home() {
         surahSidebar={<SurahSidebar surahItems={surahItems} />}
         readerPanel={
           <ReaderPanel
+            surahId={surahDetail.id}
             surahName={`Surah ${surahDetail.nameSimple}`}
             surahMeta={`Ayah-${surahDetail.ayahCount}, ${surahDetail.revelationType}`}
             ayahs={ayahs}

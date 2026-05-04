@@ -1,12 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { BookOpen, ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
 import { useReaderSettings } from "../settings/ReaderSettingsProvider";
 
 export default function RightSettingsPanel() {
-  const { arabicUiSize, translationSize, setArabicUiSize, setTranslationSize } = useReaderSettings();
+  const { arabicUiSize, translationSize, arabicFontFace, setArabicUiSize, setTranslationSize, setArabicFontFace } = useReaderSettings();
+  const [fontFaceOpen, setFontFaceOpen] = useState(false);
   const arabicPercent = ((arabicUiSize - 20) / (60 - 20)) * 100;
   const translationPercent = ((translationSize - 14) / (32 - 14)) * 100;
+  const fontFaceLabel = arabicFontFace === "amiri" ? "Amiri" : arabicFontFace === "noto" ? "Noto Sans Arabic" : "Playpen Sans Arabic";
 
   return (
     <aside className="h-full min-h-0 overflow-hidden border-l border-[#1b2432] bg-[#0d0d0d] px-5 py-6">
@@ -81,10 +84,30 @@ export default function RightSettingsPanel() {
 
         <div className="mb-10 mt-8 space-y-2">
           <p className="text-[15px] font-semibold leading-none text-[#c4c4c4]">Arabic Font Face</p>
-          <button className="flex min-h-[40px] w-full items-center justify-between rounded-sm bg-[#171717] px-4 py-[10px] text-left">
-            <span className="text-[14px] font-medium leading-none text-[#c4c4c4]">KFGQ</span>
-            <ChevronRight size={18} className="text-[#8f9491]" />
+          <button
+            type="button"
+            onClick={() => setFontFaceOpen((prev) => !prev)}
+            className="flex min-h-[40px] w-full items-center justify-between rounded-sm bg-[#171717] px-4 py-[10px] text-left"
+          >
+            <span className="text-[14px] font-medium leading-none text-[#c4c4c4]">{fontFaceLabel}</span>
+            <ChevronRight size={18} className={`text-[#8f9491] transition-transform ${fontFaceOpen ? "rotate-90" : ""}`} />
           </button>
+          {fontFaceOpen ? (
+            <div className="space-y-2 rounded-sm bg-[#111111] p-2">
+              <button type="button" onClick={() => setArabicFontFace("playpen")} className={`flex w-full items-center justify-between rounded-sm px-3 py-2 text-left text-[14px] ${arabicFontFace === "playpen" ? "bg-[#171717] text-[#2f8f42]" : "text-[#c4c4c4]"}`}>
+                <span>Playpen Sans Arabic</span>
+                {arabicFontFace === "playpen" ? <span className="text-[#2f8f42]">✓</span> : null}
+              </button>
+              <button type="button" onClick={() => setArabicFontFace("amiri")} className={`flex w-full items-center justify-between rounded-sm px-3 py-2 text-left text-[14px] ${arabicFontFace === "amiri" ? "bg-[#171717] text-[#2f8f42]" : "text-[#c4c4c4]"}`}>
+                <span>Amiri</span>
+                {arabicFontFace === "amiri" ? <span className="text-[#2f8f42]">✓</span> : null}
+              </button>
+              <button type="button" onClick={() => setArabicFontFace("noto")} className={`flex w-full items-center justify-between rounded-sm px-3 py-2 text-left text-[14px] ${arabicFontFace === "noto" ? "bg-[#171717] text-[#2f8f42]" : "text-[#c4c4c4]"}`}>
+                <span>Noto Sans Arabic</span>
+                {arabicFontFace === "noto" ? <span className="text-[#2f8f42]">✓</span> : null}
+              </button>
+            </div>
+          ) : null}
         </div>
 
         <div className="rounded-2xl border border-none bg-gradient-to-br from-[#0f2012]/40 to-[#102614]/60 p-4">
