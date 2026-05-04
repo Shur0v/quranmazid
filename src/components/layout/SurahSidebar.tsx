@@ -14,9 +14,17 @@ type SurahItem = {
 
 type SurahSidebarProps = {
   surahItems: SurahItem[];
+  mobileDrawer?: boolean;
+  onSelectSurah?: () => void;
+  hideArabicOnMobile?: boolean;
 };
 
-export default function SurahSidebar({ surahItems }: SurahSidebarProps) {
+export default function SurahSidebar({
+  surahItems,
+  mobileDrawer = false,
+  onSelectSurah,
+  hideArabicOnMobile = false,
+}: SurahSidebarProps) {
   const [query, setQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"surah" | "juz" | "page">("surah");
   const normalizedQuery = query.trim().toLowerCase();
@@ -29,7 +37,13 @@ export default function SurahSidebar({ surahItems }: SurahSidebarProps) {
   }, [surahItems, normalizedQuery]);
 
   return (
-    <aside className="sticky top-[--top-nav-size] isolate z-[1] h-full min-h-0 overflow-hidden bg-[var(--color-surface)] transition-all duration-300 ease-linear max-laptop:hidden">
+    <aside
+      className={
+        mobileDrawer
+          ? "isolate z-[1] h-full min-h-0 overflow-hidden bg-[var(--color-surface)]"
+          : "sticky top-[--top-nav-size] isolate z-[1] h-full min-h-0 overflow-hidden bg-[var(--color-surface)] transition-all duration-300 ease-linear max-[1023px]:hidden"
+      }
+    >
       <div className="flex h-full w-full border-e border-[var(--color-divider)]">
         <div className="flex h-full w-full flex-col overflow-y-auto pt-6">
           <div className="relative isolate mb-4 mx-6 flex min-h-10 items-center rounded-full border-4 border-[var(--color-divider)] bg-[var(--color-divider)]">
@@ -87,16 +101,24 @@ export default function SurahSidebar({ surahItems }: SurahSidebarProps) {
             ) : null}
             {filteredSurahs.map((surah) => (
               <div key={surah.id} className="block pb-2 pe-[26px] ps-[26px]">
-                <Link href={`/surah/${surah.id}`}>
+                <Link href={`/surah/${surah.id}`} onClick={onSelectSurah}>
                   <div className={`group/card flex h-[76px] w-full min-w-[200px] cursor-pointer select-none items-center justify-between gap-5 rounded-xl border border-[var(--color-divider)] px-4 tablet:gap-4 hover:bg-[var(--color-hover-surface)] ${surah.active ? "!border-[var(--color-accent)]/30 !bg-[var(--color-hover-surface)]" : ""}`}>
                     <div className={`flex size-[32px] min-h-8 min-w-8 rotate-45 items-center justify-center rounded-[6px] transition-colors duration-200 ${surah.active ? "bg-[var(--color-accent)]" : "bg-[var(--color-surah-number-bg)] group-hover/card:bg-[var(--color-accent)]"}`}>
                       <span className={`-rotate-45 text-[13px] font-medium transition-colors duration-200 ${surah.active ? "text-[var(--color-neutral-100)]" : "text-[var(--color-text-muted)] group-hover/card:text-[var(--color-neutral-100)]"}`}>{surah.id}</span>
                     </div>
-                    <div className="w-1/2 flex-grow text-start laptop:w-full desktop:w-1/2 desktop:flex-shrink-0">
+                    <div className="min-w-0 flex-grow text-start">
                       <p className="line-clamp-1 break-all pr-3 text-[15px] font-medium text-[var(--color-text-main)]">{surah.name}</p>
                       <p className="line-clamp-1 break-all text-[13px] font-normal text-[var(--color-text-muted)]">{surah.subtitle}</p>
                     </div>
-                    <div className="flex h-[20px] items-center justify-end max-[1439px]:hidden">
+                    <div
+                      className={`h-[35px] w-[72px] min-w-[72px] flex-shrink-0 items-center justify-end ${
+                        mobileDrawer
+                          ? hideArabicOnMobile
+                            ? "max-[639px]:hidden !flex"
+                            : "!flex"
+                          : "hidden min-[1440px]:flex"
+                      }`}
+                    >
                       <p className="font-arabic-surah line-clamp-2 text-right text-[20px] leading-[1] text-[var(--color-text-muted)]">
                         {surah.arabicName}
                       </p>
