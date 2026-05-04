@@ -15,7 +15,7 @@ type ReaderPanelProps = {
 
 export default function ReaderPanel({ surahName, surahMeta, ayahs }: ReaderPanelProps) {
   return (
-    <section className="border-r border-border">
+    <section className="hide-scrollbar h-[calc(100vh-60px)] overflow-y-auto border-r border-border">
       <section className="[--padding-x:15px] tablet:[--padding-x:24px] desktop:[--padding-x:36px]">
         <div className="grid grid-cols-3 items-center px-[20px] py-[16px]">
           <div className="flex items-center justify-start">

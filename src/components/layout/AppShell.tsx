@@ -17,11 +17,11 @@ export default function AppShell({
 }: AppShellProps) {
   return (
     <main className="min-h-screen bg-[#0d0d0d] text-foreground">
-      <div className="grid min-h-screen grid-cols-[60px_1fr]">
+      <div className="grid h-screen grid-cols-[60px_1fr] overflow-hidden">
         {leftSidebar}
-        <div className="grid min-h-screen grid-rows-[60px_1fr]">
+        <div className="grid h-screen grid-rows-[60px_1fr] overflow-hidden">
           {topBar}
-          <div className="grid grid-cols-[299px_1fr_333px] pt-[60px]">
+          <div className="grid h-[calc(100vh-60px)] grid-cols-[299px_1fr_333px] overflow-hidden pt-[60px]">
             {surahSidebar}
             {readerPanel}
             {rightPanel}

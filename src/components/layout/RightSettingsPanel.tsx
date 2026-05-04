@@ -2,7 +2,7 @@ import { BookOpen, ChevronDown, ChevronRight, ChevronUp } from "lucide-react";
 
 export default function RightSettingsPanel() {
   return (
-    <aside className="border-l border-[#1b2432] bg-[#0d0d0d] px-5 py-6">
+    <aside className="h-[calc(100vh-60px)] overflow-hidden border-l border-[#1b2432] bg-[#0d0d0d] px-5 py-6">
       <div className="relative isolate mb-6 flex min-h-10 items-center rounded-full border-4 border-[#171717] bg-[#171717]">
         <button className="z-10 h-full w-full text-[14px] font-semibold text-[#c4c4c4]">Translation</button>
         <button className="z-10 h-full w-full text-[14px] text-[#787d7a]">Reading</button>
