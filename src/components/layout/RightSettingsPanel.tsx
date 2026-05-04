@@ -7,7 +7,12 @@ import RightbarFontInactiveIcon from "../../../public/icons/rightbarfontinactive
 import RightbarReadingIcon from "../../../public/icons/rightbarreadingicon";
 import { useReaderSettings } from "../settings/ReaderSettingsProvider";
 
-export default function RightSettingsPanel() {
+type RightSettingsPanelProps = {
+  className?: string;
+  scrollable?: boolean;
+};
+
+export default function RightSettingsPanel({ className = "", scrollable = false }: RightSettingsPanelProps) {
   const { arabicUiSize, translationSize, arabicFontFace, setArabicUiSize, setTranslationSize, setArabicFontFace } = useReaderSettings();
   const [fontFaceOpen, setFontFaceOpen] = useState(false);
   const [fontSettingsOpen, setFontSettingsOpen] = useState(true);
@@ -17,7 +22,7 @@ export default function RightSettingsPanel() {
   const fontFaceLabel = arabicFontFace === "amiri" ? "Amiri" : arabicFontFace === "noto" ? "Noto Sans Arabic" : "Playpen Sans Arabic";
 
   return (
-    <aside className="h-full min-h-0 overflow-hidden bg-[var(--color-surface)] px-5 py-6">
+    <aside className={`h-full min-h-0 bg-[var(--color-surface)] px-5 py-6 ${scrollable ? "hide-scrollbar overflow-y-auto" : "overflow-hidden"} ${className}`}>
       <div className="relative isolate mb-6 flex min-h-10 items-center rounded-full border-4 border-[var(--color-divider)] bg-[var(--color-divider)]">
         <button
           type="button"
@@ -75,9 +80,8 @@ export default function RightSettingsPanel() {
         </button>
 
         <div
-          className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
-            fontSettingsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-          }`}
+          className={`grid overflow-hidden transition-all duration-300 ease-in-out ${fontSettingsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+            }`}
         >
           <div className="min-h-0">
             <div className={`space-y-4 ${fontSettingsOpen ? "pt-1" : ""}`}>
@@ -138,9 +142,8 @@ export default function RightSettingsPanel() {
               </button>
 
               <div
-                className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
-                  fontFaceOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                }`}
+                className={`grid overflow-hidden transition-all duration-300 ease-in-out ${fontFaceOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
               >
                 <div className="min-h-0">
                   <div className="space-y-2 rounded-sm bg-[var(--color-dropdown-bg)] p-2">
@@ -150,7 +153,7 @@ export default function RightSettingsPanel() {
                       className={`flex w-full items-center justify-between rounded-sm px-3 py-2 text-left text-[14px] ${arabicFontFace === "playpen" ? "bg-[var(--color-divider)] text-[var(--color-accent)]" : "text-[var(--color-text-main)]"}`}
                     >
                       <span>Playpen Sans Arabic</span>
-                      {arabicFontFace === "playpen" ? <span className="text-[var(--color-accent)]">?</span> : null}
+                      {arabicFontFace === "playpen" ? <span className="text-[var(--color-accent)]">✓</span> : null}
                     </button>
                     <button
                       type="button"
@@ -158,7 +161,7 @@ export default function RightSettingsPanel() {
                       className={`flex w-full items-center justify-between rounded-sm px-3 py-2 text-left text-[14px] ${arabicFontFace === "amiri" ? "bg-[var(--color-divider)] text-[var(--color-accent)]" : "text-[var(--color-text-main)]"}`}
                     >
                       <span>Amiri</span>
-                      {arabicFontFace === "amiri" ? <span className="text-[var(--color-accent)]">?</span> : null}
+                      {arabicFontFace === "amiri" ? <span className="text-[var(--color-accent)]">✓</span> : null}
                     </button>
                     <button
                       type="button"
@@ -166,7 +169,7 @@ export default function RightSettingsPanel() {
                       className={`flex w-full items-center justify-between rounded-sm px-3 py-2 text-left text-[14px] ${arabicFontFace === "noto" ? "bg-[var(--color-divider)] text-[var(--color-accent)]" : "text-[var(--color-text-main)]"}`}
                     >
                       <span>Noto Sans Arabic</span>
-                      {arabicFontFace === "noto" ? <span className="text-[var(--color-accent)]">?</span> : null}
+                      {arabicFontFace === "noto" ? <span className="text-[var(--color-accent)]">✓</span> : null}
                     </button>
                   </div>
                 </div>

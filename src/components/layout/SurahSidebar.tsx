@@ -96,7 +96,7 @@ export default function SurahSidebar({ surahItems }: SurahSidebarProps) {
                       <p className="line-clamp-1 break-all pr-3 text-[15px] font-medium text-[var(--color-text-main)]">{surah.name}</p>
                       <p className="line-clamp-1 break-all text-[13px] font-normal text-[var(--color-text-muted)]">{surah.subtitle}</p>
                     </div>
-                    <div className="flex h-[20px] items-center justify-end">
+                    <div className="flex h-[20px] items-center justify-end max-[1439px]:hidden">
                       <p className="font-arabic-surah line-clamp-2 text-right text-[20px] leading-[1] text-[var(--color-text-muted)]">
                         {surah.arabicName}
                       </p>

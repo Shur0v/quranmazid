@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import TopbarSearchIcon from "../../../public/icons/topbarsearchicon";
@@ -6,7 +6,11 @@ import TopbarSetingIcon from "../../../public/icons/topbarsetingicon";
 import TopbarSupportIcon from "../../../public/icons/topbarsupporticon";
 import TopbarThemeIcon from "../../../public/icons/topbarthemeicon";
 
-export default function TopBar() {
+type TopBarProps = {
+  onOpenSettings?: () => void;
+};
+
+export default function TopBar({ onOpenSettings }: TopBarProps) {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -49,8 +53,16 @@ export default function TopBar() {
               Theme
             </span>
           </div>
-          <div className="group relative">
-            <button type="button" className="flex size-[34px] min-w-[34px] cursor-pointer items-center justify-center rounded-full bg-[var(--color-accent-soft)] p-2 active:scale-90 text-[var(--color-topbar-icon)]" data-state="closed" aria-label="Setting"><TopbarSetingIcon className="h-[18px] w-[18px]" /></button>
+          <div className="group relative min-[1440px]:hidden">
+            <button
+              type="button"
+              onClick={onOpenSettings}
+              className="flex size-[34px] min-w-[34px] cursor-pointer items-center justify-center rounded-full bg-[var(--color-accent-soft)] p-2 active:scale-90 text-[var(--color-topbar-icon)]"
+              data-state="closed"
+              aria-label="Setting"
+            >
+              <TopbarSetingIcon className="h-[18px] w-[18px]" />
+            </button>
             <span className="pointer-events-none absolute left-1/2 top-[42px] z-20 -translate-x-1/2 whitespace-nowrap rounded-lg bg-[#d9d9d9] px-3 py-2 text-[12px] leading-none text-[#2a2a2a] opacity-0 shadow-sm transition-opacity duration-150 group-hover:opacity-100">
               Setting
             </span>
